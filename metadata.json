@@ -1,0 +1,10 @@
+{
+  "name": "Tribhuvan University ID Card Studio",
+  "description": "Professional photograph and realistic ID card generator for Student, Employee, Library, Loyalty, and Nepal Driving License (Front) smart cards.",
+  "requestFramePermissions": [
+    "camera"
+  ],
+  "majorCapabilities": [
+    "MAJOR_CAPABILITY_SERVER_SIDE_GEMINI_API"
+  ]
+}

@@ -1,0 +1,58 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <script>
+      (function () {
+        try {
+          var currentFetch = window.fetch;
+          var desc = Object.getOwnPropertyDescriptor(window, 'fetch');
+          if (!desc) {
+            var proto = Object.getPrototypeOf(window);
+            desc = proto ? Object.getOwnPropertyDescriptor(proto, 'fetch') : null;
+          }
+          if (desc && !desc.set && desc.configurable) {
+            Object.defineProperty(window, 'fetch', {
+              get: function () {
+                return currentFetch;
+              },
+              set: function (newFn) {
+                currentFetch = newFn;
+              },
+              configurable: true,
+              enumerable: true,
+            });
+          }
+        } catch (e) {}
+
+        window.addEventListener(
+          'error',
+          function (e) {
+            var msg = (e && (e.message || (e.error && e.error.message))) || '';
+            if (typeof msg === 'string' && msg.indexOf('fetch') !== -1 && msg.indexOf('only a getter') !== -1) {
+              e.preventDefault();
+              if (e.stopImmediatePropagation) e.stopImmediatePropagation();
+              return true;
+            }
+          },
+          true
+        );
+      })();
+    </script>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Tribhuvan University ID Card Studio</title>
+    <meta name="description" content="Professional photograph and realistic ID card generator for Student, Employee, Library, Loyalty, and Nepal Driving License (Front) smart cards." />
+    <meta property="og:title" content="Tribhuvan University ID Card Studio" />
+    <meta property="og:description" content="Professional photograph and realistic ID card generator for Student, Employee, Library, Loyalty, and Nepal Driving License (Front) smart cards." />
+    <meta property="og:type" content="website" />
+    <meta name="twitter:card" content="summary_large_image" />
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@600;700;800&family=Plus+Jakarta+Sans:wght@400;500;600;700;800&family=Space+Mono:wght@400;700&family=Roboto+Mono:wght@400;500;600;700&family=Mukta:wght@400;600;700;800&family=Great+Vibes&family=Playfair+Display:ital,wght@1,600&display=swap" rel="stylesheet" crossorigin="anonymous">
+  </head>
+  <body>
+    <div id="root"></div>
+    <script type="module" src="/src/main.tsx"></script>
+  </body>
+</html>
+
